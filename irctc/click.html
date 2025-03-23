@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Alerts</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f9fa;
+            padding: 20px;
+        }
+        .alert-box {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .alert-heading {
+            color: #d9534f;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2 class="text-center mb-4">🚆 Train Alerts</h2>
+
+        <div id="alertsContainer">
+            <!-- Alerts will be dynamically added here -->
+        </div>
+    </div>
+
+    <script>
+        // Train Alert Data
+        const alerts = [
+            { type: "danger", message: "🚨 Train No. 12625 (Kerala Express) delayed by 2 hours due to bad weather." },
+            { type: "warning", message: "⚠️ Train No. 12802 (Purushottam Express) canceled on March 19, 2025, for maintenance." },
+            { type: "info", message: "📢 Train No. 12952 (Mumbai Rajdhani) rescheduled to depart at 22:45 hrs instead of 20:30 hrs." },
+            { type: "primary", message: "🔔 New Reservation Rules: Advance booking reduced from 120 days to 60 days w.e.f. November 1, 2024." }
+        ];
+
+        function displayAlerts() {
+            let container = document.getElementById("alertsContainer");
+            container.innerHTML = "";
+
+            alerts.forEach(alert => {
+                container.innerHTML += `
+                    <div class="alert alert-${alert.type} alert-box">
+                        <strong class="alert-heading">${alert.message}</strong>
+                    </div>
+                `;
+            });
+        }
+
+        // Load alerts on page load
+        window.onload = displayAlerts;
+    </script>
+
+</body>
+</html>
