@@ -1,0 +1,218 @@
+/* style.css */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #181818;
+    color: #e0e0e0;
+    overflow: hidden;
+}
+
+#background-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+}
+
+.signup-container {
+    display: flex;
+    width: 85%;
+    max-width: 1300px;
+    background: rgba(30, 30, 30, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.form-wrapper {
+    flex: 1;
+    padding: 70px;
+    position: relative;
+}
+
+.form-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(45deg, #4a90e2, #63b3ed, #4a90e2);
+    z-index: -1;
+    border-radius: 23px;
+    animation: borderAnimation 5s linear infinite;
+}
+
+@keyframes borderAnimation {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+
+.form-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.form-header h2 {
+    margin: 0;
+    font-size: 3em;
+    color: #fff;
+    font-weight: 300;
+    animation: slideIn 0.8s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-60px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 18px;
+    border: none;
+    border-bottom: 3px solid #666;
+    outline: none;
+    font-size: 1.2em;
+    background: transparent;
+    color: #e0e0e0;
+    transition: border-color 0.3s ease;
+}
+
+.input-group label {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    pointer-events: none;
+    transition: 0.3s ease;
+    color: #999;
+}
+
+.input-group input:focus + label,
+.input-group input:valid + label {
+    top: -12px;
+    font-size: 1em;
+    color: #63b3ed;
+}
+
+.input-group .highlight {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: #63b3ed;
+    transition: 0.3s ease;
+}
+
+.input-group input:focus + label + .highlight,
+.input-group input:valid + label + .highlight {
+    width: 100%;
+}
+
+button {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(to right, #4a90e2, #63b3ed);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 6px 12px rgba(74, 144, 226, 0.4);
+}
+
+button:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 16px rgba(74, 144, 226, 0.5);
+}
+
+.social-signup {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.social-icon {
+    display: inline-block;
+    padding: 15px 30px;
+    margin: 0 15px;
+    border-radius: 10px;
+    color: #fff;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.social-icon:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.6);
+}
+
+.google { background: #db4437; }
+.facebook { background: #3b5998; }
+.twitter { background: #1da1f2; }
+
+.visual-wrapper {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+#three-d-container {
+    width: 250px;
+    height: 250px;
+}
+
+.visual-content {
+    text-align: center;
+    padding: 40px;
+    z-index: 1;
+    animation: zoomIn 1s ease-out;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.visual-text h1 {
+    font-size: 3.5em;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+.visual-text p {
+    font-size: 1.2em;
+    color: #bbb;
+}
