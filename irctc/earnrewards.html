@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Earn Rewards - Animated!</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, black, black);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+        .reward-container {
+            text-align: center;
+            position: relative;
+        }
+        .reward-button {
+            background: linear-gradient(to right, #ff7eb3, #ff758c);
+            border: none;
+            color: white;
+            padding: 15px 35px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .reward-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+        .reward-cards {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 300px;
+            height: 140px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            border: 3px solid transparent;
+            background-clip: padding-box;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border: 3px solid #ff758c;
+        }
+        .flower {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 5px;
+            border-radius: 10px;
+        }
+        .card p {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            cursor: pointer;
+            font-size: 22px;
+            color: #ff758c;
+            font-weight: bold;
+            background: none;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="reward-container">
+        <button class="reward-button" onclick="showRewards()">Claim Your Reward!</button>
+        <div class="reward-cards" id="rewardCards">
+            <button class="close-btn" onclick="hideRewards()">×</button>
+            <div class="card" onclick="claimOffer()">
+                <img src="https://images.pexels.com/photos/4544735/pexels-photo-4544735.jpeg?auto=compress&cs=tinysrgb&w=600" class="flower" alt="Flower">
+                <p>Gift Card</p>
+            </div>
+            <div class="card" onclick="claimOffer()">
+                <img src="https://images.pexels.com/photos/5942584/pexels-photo-5942584.jpeg?auto=compress&cs=tinysrgb&w=600" class="flower" alt="Flower">
+                <p>Bonus Points</p>
+            </div>
+            <div class="card" onclick="claimOffer()">
+                <img src="https://images.pexels.com/photos/5926234/pexels-photo-5926234.jpeg?auto=compress&cs=tinysrgb&w=600" class="flower" alt="Flower">
+                <p>Exclusive Offer</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function showRewards() {
+            document.getElementById("rewardCards").style.display = "flex";
+        }
+        function hideRewards() {
+            document.getElementById("rewardCards").style.display = "none";
+        }
+        function claimOffer() {
+            alert("🎉 Offer Claimed! 🎉");
+            hideRewards();
+        }
+    </script>
+</body>
+</html>
