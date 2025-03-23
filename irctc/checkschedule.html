@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Schedule - IRCTC</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body { background-color: #f8f9fa; font-family: Arial, sans-serif; }
+        .navbar { background: #003366; padding: 10px; }
+        .navbar a { color: white !important; font-weight: bold; }
+        .schedule-container { max-width: 600px; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); margin-top: 50px; }
+        .btn-check { background-color: #ff6600; color: white; font-weight: bold; }
+        .btn-check:hover { background-color: #cc5500; }
+        .footer { background: #222; color: white; text-align: center; padding: 10px; margin-top: 30px; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand text-white fw-bold" href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7FihFnL3fXD3o0UNQLwQXnet4SjYKqdGa-w&s" alt="IRCTC Logo" height="40"> IRCTC</a>
+        </div>
+    </nav>
+    <div class="container d-flex justify-content-center">
+        <div class="schedule-container">
+            <h3 class="text-center">Check Train Schedule</h3>
+            <form id="scheduleForm">
+                <div class="mb-3">
+                    <label class="form-label">Enter Train Number</label>
+                    <input type="text" class="form-control" id="trainNumber" placeholder="e.g. 12045" required>
+                    <div id="trainError" class="text-danger mt-1" style="display: none;">Invalid Train Number!</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Select Date</label>
+                    <input type="date" class="form-control" id="trainDate" required>
+                    <div id="dateError" class="text-danger mt-1" style="display: none;">No train available on this date!</div>
+                </div>
+                <button type="submit" class="btn btn-check w-100">Check Schedule</button>
+            </form>
+            <div class="mt-3" id="scheduleResult" style="display: none;">
+                <h5 class="text-center">Train Schedule for <span id="selectedDate"></span>:</h5>
+                <table class="table table-bordered mt-2">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Station</th>
+                            <th>Arrival</th>
+                            <th>Departure</th>
+                            <th>Halt</th>
+                        </tr>
+                    </thead>
+                    <tbody id="scheduleTable"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <footer class="footer"><p>© 2025 IRCTC. All rights reserved.</p></footer>
+    <script>
+        const trainData = {};
+        const stations = ["New Delhi", "Mumbai Central", "Chennai", "Kolkata", "Bangalore", "Hyderabad", "Pune", "Lucknow", "Ahmedabad", "Jaipur", "Patna", "Bhubaneswar", "Guwahati", "Trivandrum", "Bhopal", "Nagpur"];
+
+        function getRandomTime(base) {
+            let hour = base + Math.floor(Math.random() * 3);
+            let min = Math.random() > 0.5 ? "30" : "00";
+            let period = hour >= 12 ? "PM" : "AM";
+            if (hour > 12) hour -= 12;
+            return `${hour}:${min} ${period}`;
+        }
+
+        for (let i = 1; i <= 200; i++) {
+            let trainNumber = (12000 + i).toString();
+            let availableDates = [];
+            for (let j = 0; j < 10; j++) {
+                let date = new Date();
+                date.setDate(date.getDate() + j);
+                availableDates.push(date.toISOString().split("T")[0]);
+            }
+            trainData[trainNumber] = { dates: availableDates };
+        }
+
+        function showSchedule() {
+            let trainNumber = document.getElementById("trainNumber").value;
+            let trainDate = document.getElementById("trainDate").value;
+            let trainError = document.getElementById("trainError");
+            let dateError = document.getElementById("dateError");
+            let scheduleResult = document.getElementById("scheduleResult");
+            let scheduleTable = document.getElementById("scheduleTable");
+            let selectedDate = document.getElementById("selectedDate");
+
+            if (trainData[trainNumber]) {
+                if (trainData[trainNumber].dates.includes(trainDate)) {
+                    trainError.style.display = "none";
+                    dateError.style.display = "none";
+                    scheduleResult.style.display = "block";
+                    selectedDate.textContent = trainDate;
+
+                    let schedule = [];
+                    let arrivalTime = 5;
+                    for (let j = 0; j < stations.length; j++) {
+                        let departureTime = arrivalTime + 1;
+                        schedule.push({
+                            station: stations[j],
+                            arrival: getRandomTime(arrivalTime),
+                            departure: getRandomTime(departureTime),
+                            halt: Math.random() > 0.5 ? "30 min" : "1 hr"
+                        });
+                        arrivalTime = departureTime;
+                    }
+
+                    scheduleTable.innerHTML = "";
+                    schedule.forEach(stop => {
+                        let row = `<tr>
+                            <td>${stop.station}</td>
+                            <td>${stop.arrival}</td>
+                            <td>${stop.departure}</td>
+                            <td>${stop.halt}</td>
+                        </tr>`;
+                        scheduleTable.innerHTML += row;
+                    });
+                } else {
+                    dateError.style.display = "block";
+                    scheduleResult.style.display = "none";
+                }
+                trainError.style.display = "block";
+                scheduleResult.style.display = "none";
+            }
+        }
+
+        document.getElementById("trainDate").addEventListener("change", showSchedule);
+        document.getElementById("trainNumber").addEventListener("input", showSchedule);
+    </script>
+</body>
+</html>
