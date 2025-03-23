@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Tracker</title>
+
+    <!-- Bootstrap for styling -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .tracker-container {
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            margin: auto;
+        }
+        .progress-bar {
+            height: 10px;
+            border-radius: 5px;
+        }
+        .train-status {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .on-time { color: green; }
+        .delayed { color: orange; }
+        .cancelled { color: red; }
+    </style>
+</head>
+<body>
+
+    <h2>🚆 Live Train Tracker</h2>
+
+    <div class="search-box">
+        <input type="text" id="trainInput" class="form-control" placeholder="Enter Train No. or Name">
+        <button class="btn btn-warning mt-2" onclick="searchTrain()">Search</button>
+    </div>
+
+    <div id="trackerContainer"></div>
+
+    <script>
+        const trainData = {};
+
+        // Generate 100 sample train numbers
+        for (let i = 10001; i <= 11000; i++) {
+            trainData[i] = {
+                name: "Express Train " + i,
+                progress: Math.floor(Math.random() * 101),
+                status: ["On Time", "Delayed", "Cancelled"][Math.floor(Math.random() * 3)]
+            };
+        }
+
+        function searchTrain() {
+            let trainNo = document.getElementById("trainInput").value.trim();
+            let trackerContainer = document.getElementById("trackerContainer");
+
+            if (trainData[trainNo]) {
+                let train = trainData[trainNo];
+                let statusClass = train.status === "On Time" ? "on-time" :
+                                 train.status === "Delayed" ? "delayed" : "cancelled";
+
+                trackerContainer.innerHTML = `
+                    <div class="tracker-container">
+                        <h4>${train.name} (${trainNo})</h4>
+                        <div class="train-status ${statusClass}">
+                            ${train.status}
+                        </div>
+                        <div class="progress mt-3">
+                            <div class="progress-bar bg-${train.status === "On Time" ? "success" :
+                                                         train.status === "Delayed" ? "warning" : "danger"}" 
+                                 style="width: ${train.progress}%"></div>
+                        </div>
+                        <p class="mt-2">${train.progress}% of journey completed</p>
+                    </div>
+                `;
+            } else {
+                trackerContainer.innerHTML = `<p class="text-warning">❌ Train not found. Please enter a valid Train Number.</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
