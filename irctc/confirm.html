@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Booking</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        .container { max-width: 400px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); }
+        input, select { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; }
+        .confirm-btn {
+            background-color: green; color: white; padding: 10px; border: none;
+            cursor: pointer; width: 100%; border-radius: 5px;
+        }
+        .confirm-btn:hover { background-color: darkgreen; }
+        .train-details { font-weight: bold; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+    <h1>Confirm Booking</h1>
+    <div class="container">
+        <div class="train-details" id="trainDetails"></div>
+
+        <form id="bookingForm">
+            <input type="text" id="passengerName" placeholder="Enter your name" required>
+            <input type="number" id="passengerAge" placeholder="Enter your age" required min="1">
+            <select id="passengerClass">
+                <option value="Sleeper">Sleeper</option>
+                <option value="AC 3 Tier">AC 3 Tier</option>
+                <option value="AC 2 Tier">AC 2 Tier</option>
+                <option value="First Class AC">First Class AC</option>
+            </select>
+            <button type="submit" class="confirm-btn">Confirm Booking</button>
+        </form>
+    </div>
+
+    <script>
+        // Get train details from URL
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                train: params.get("train"),
+                name: params.get("name")
+            };
+        }
+
+        // Display train details
+        function displayTrainDetails() {
+            const { train, name } = getQueryParams();
+            if (train && name) {
+                document.getElementById("trainDetails").innerHTML = 
+                    `Booking for <strong>${name} (${train})</strong>`;
+            } else {
+                document.getElementById("trainDetails").innerHTML = 
+                    "No train selected!";
+            }
+        }
+
+        // Handle form submission
+        document.getElementById("bookingForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const name = document.getElementById("passengerName").value;
+            const age = document.getElementById("passengerAge").value;
+            const travelClass = document.getElementById("passengerClass").value;
+
+            alert(`Booking confirmed for ${name}, Age: ${age}, Class: ${travelClass}`);
+            window.location.href = "success.html"; // Redirect to success page
+        });
+
+        displayTrainDetails();
+    </script>
+
+</body>
+</html>
