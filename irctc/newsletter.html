@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRCTC Footer</title>
+    <style>
+        :root {
+            --primary-color: #4B0082;
+            --secondary-color: #6A0DAD;
+            --highlight-color: #FFD700;
+            --text-light: #dcdcdc;
+            --text-muted: rgba(255, 255, 255, 0.7);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .social-media h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: var(--highlight-color);
+        }
+
+        .social-icons img {
+            width: 25px;
+            height: 25px;
+        }
+
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .menu-item {
+            text-align: left;
+            position: relative;
+            border-radius: 8px;
+            padding: 8px;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .dropdown-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 10px;
+            transition: color 0.3s;
+        }
+
+        .dropdown-btn:hover {
+            color: var(--highlight-color);
+        }
+
+        .dropdown {
+            list-style: none;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.4s ease-in-out;
+        }
+
+        .dropdown li {
+            font-size: 14px;
+            padding: 8px 12px;
+            color: var(--text-light);
+            transition: color 0.3s, background 0.3s;
+        }
+
+        .dropdown li:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+
+        .footer-bottom {
+            margin-top: 30px;
+            font-size: 14px;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <footer class="footer">
+        <div class="social-media">
+            <h3>Get Connected with us on social networks</h3>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/IRCTCofficial/"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtfbcYeYgf0wQJ-LSPm3CPbyB7T1p0f5bnaA&s" alt="Facebook" style="width:50px;height:45px;border-radius:400px;"></a>
+                <a href="https://www.thehindubusinessline.com/info-tech/how-to/indian-railways-now-check-irctc-pnr-status-on-whatsapp/article65974995.ece"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlQ_0ZN5Vmw7k2oV_6xsh12fyu0sEU09dn1w&s" alt="WhatsApp" style="width:50px;height:45px;border-radius:400px;"></a>
+                <a href="https://www.youtube.com/c/IRCTCOFFICIAL"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" style="width:50px;height:45px;border-radius:400px;"></a>
+                <a href="https://www.instagram.com/irctc.official/?hl=en"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZKeSw8DDov0_KWbM6ef9foIUdti6LkWZ6zQ&s" alt="Instagram" style="width:50px;height:45px;border-radius:400px;"></a>
+                <a href="https://www.linkedin.com/company/irctc/?originalSubdomain=in"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYqE3asP0YRPRnR6U3BS85jeB2u7UWPrmrzA&s" alt="LinkedIn" style="width:50px;height:45px;border-radius:400px;"></a>
+                <a href="https://t.me/IRCTC_Official/8148"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/1200px-Telegram_logo.svg.png" alt="Telegram" style="width:50px;height:45px;border-radius:400px;"></a>
+                <a href="https://in.pinterest.com/irctcofficial/"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsowGQKww0vUVBidSgOu75KHCIm50LGKT7Vw&s" alt="Pinterest" style="width:50px;height:45px;border-radius:400px;"></a>
+                <a href="https://www.tumblr.com/irctcofficial"><img src="https://64.media.tumblr.com/426446f32342eeb234de07a6582a706e/7ab35780920aea80-5a/s512x512u_c1/bef22081420a3c139663a5e9ae776fea80ad60b5.jpg" alt="Tumblr" style="width:50px;height:45px;border-radius:400px;"></a>
+                <a href="https://x.com/IRCTCofficial/highlightsx"><img src="https://images.macrumors.com/t/7uxIh0WmbJb3efOxseFOV_I7ekw=/2250x/article-new/2021/03/Twitter-Feature.jpg" alt="Twitter" style="width:50px;height:45px;border-radius:400px;"></a>
+            </div>
+        </div>
+
+        <div class="menu" id="menuContainer"></div>
+
+        <div class="footer-bottom">© 2025 IRCTC. All Rights Reserved.</div>
+    </footer>
+
+    <script>
+        const menuData = [
+            { category: "IRCTC Trains", options: ["Book Train Tickets", "Tatkal Booking", "Train Schedule"] },
+            { category: "General Information", options: ["Train Running Status", "PNR Enquiry", "Station Codes"] },
+            { category: "Important Information", options: ["Railway Zones", "Safety Guidelines", "Tourist Guidelines"] },
+            { category: "Agents", options: ["Agent Registration", "Agent Login", "Agent Support"] },
+            { category: "Enquiries", options: ["Customer Support", "FAQs", "Helpline Numbers"] },
+            { category: "IRCTC eWallet", options: ["Wallet Recharge", "Transaction History", "How to Use"] },
+            { category: "Avail Loyalty Benefits", options: ["IRCTC Loyalty Points", "Redeem Rewards", "Program Details"] },
+            { category: "IRCTC Official App", options: ["Download App", "App Features", "User Guide"] },
+            { category: "Advertise with us", options: ["Advertising Options", "Pricing", "Contact Us"] },
+            { category: "Refund Rules", options: ["Cancellation Policy", "Refund Status", "Compensation Rules"] },
+            { category: "Person With Disability Facilities", options: ["Special Seats", "Assistance Services", "Concessions"] },
+            { category: "IRCTC-iPAY Payment Gateway", options: ["How it Works", "Supported Banks", "Transaction Security"] },
+            { category: "IRCTC Zone", options: ["User Dashboard", "Booking History", "Preferences"] },
+            { category: "Policies", options: ["Privacy Policy", "Terms & Conditions", "Refund & Cancellation"] },
+            { category: "Train Information", options: ["Train Timings", "Seat Availability", "Fare Inquiry"] },
+            { category: "Booking Assistance", options: ["Ticket Booking Guide", "IRCTC Helpline", "Reservation Rules"] },
+            { category: "Catering Services", options: ["E-Catering", "Onboard Menu", "Premium Food"] },
+            { category: "Tourist Services", options: ["Luxury Trains", "Bharat Darshan", "IRCTC Packages"] },
+            { category: "Feedback & Complaints", options: ["Lodge a Complaint", "Feedback Form", "Customer Care"] },
+            { category: "Other Services", options: ["Retiring Rooms", "Lounge Booking", "Wheelchair Assistance"] }
+        ];
+        
+        const menuContainer = document.getElementById("menuContainer");
+        menuContainer.innerHTML = menuData.map(item => `
+            <div class="menu-item">
+                <button class="dropdown-btn">${item.category} ▼</button>
+                <ul class="dropdown">
+                    ${item.options.map(option => `<li>${option}</li>`).join("")}
+                </ul>
+            </div>
+        `).join("");
+
+        const dropdownBtns = document.querySelectorAll(".dropdown-btn");
+        dropdownBtns.forEach(btn => {
+            btn.addEventListener("click", function() {
+                const dropdown = this.nextElementSibling;
+                if (dropdown.style.maxHeight) {
+                    dropdown.style.maxHeight = null;
+                } else {
+                    dropdown.style.maxHeight = dropdown.scrollHeight + "px";
+                }
+            });
+        });
+    </script>
+</body>
+</html>
