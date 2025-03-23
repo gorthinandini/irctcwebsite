@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRCTC Services</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #004080, #007bff);
+            color: white;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 50px 20px;
+            font-size: 2rem;
+            font-weight: bold;
+            animation: slideDown 1s ease-in-out;
+        }
+
+        /* Service Cards */
+        .service-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 25px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .service-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 50px;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        Our Services
+    </div>
+
+    <!-- Service Section -->
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="service-card text-center p-4">
+                    <h4>Train Ticket Booking</h4>
+                    <p>Book train tickets seamlessly with real-time availability and instant confirmation.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="service-card text-center p-4">
+                    <h4>PNR Status Check</h4>
+                    <p>Track your PNR status in real time and get updates on ticket confirmation.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="service-card text-center p-4">
+                    <h4>Train Schedule</h4>
+                    <p>View train schedules, routes, and stops with accurate time details.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="service-card text-center p-4">
+                    <h4>IRCTC Wallet</h4>
+                    <p>Recharge and pay for your tickets faster using the IRCTC e-wallet.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="service-card text-center p-4">
+                    <h4>Food on Train</h4>
+                    <p>Order delicious meals and snacks directly to your seat while traveling.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="service-card text-center p-4">
+                    <h4>Refund & Cancellations</h4>
+                    <p>Get hassle-free refunds and easy cancellations for your bookings.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 IRCTC. All rights reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
