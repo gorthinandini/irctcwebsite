@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Timings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/@framer/motion@10.12.16/dist/framer-motion.umd.js"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-6">
+        <h1 class="text-4xl font-bold text-center text-gray-800 mb-8">Meal Timings</h1>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-2xl shadow-lg hover:scale-105 transition-transform duration-300 text-center" data-animate>
+                <h2 class="text-2xl font-semibold">Breakfast</h2>
+                <p class="text-gray-600">7:00 AM - 10:00 AM</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-lg hover:scale-105 transition-transform duration-300 text-center" data-animate>
+                <h2 class="text-2xl font-semibold">Lunch</h2>
+                <p class="text-gray-600">12:00 PM - 2:30 PM</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-lg hover:scale-105 transition-transform duration-300 text-center" data-animate>
+                <h2 class="text-2xl font-semibold">Dinner</h2>
+                <p class="text-gray-600">7:00 PM - 10:00 PM</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const elements = document.querySelectorAll("[data-animate]");
+            elements.forEach(el => {
+                framerMotion.motion(el, {
+                    initial: { opacity: 0, y: 50 },
+                    animate: { opacity: 1, y: 0 },
+                    transition: { duration: 0.6, ease: "easeOut" }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
