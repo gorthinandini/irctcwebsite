@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Train</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Book Your Train</h1>
+        <p><strong>Train Number:</strong> <span id="train-number"></span></p>
+        <p><strong>Train Name:</strong> <span id="train-name"></span></p>
+       <a href="confirm.html"> <button class="book-btn">Confirm Booking</button></a>
+    </div>
+
+    <script>
+        // Get train details from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        document.getElementById("train-number").textContent = urlParams.get("train");
+        document.getElementById("train-name").textContent = urlParams.get("name");
+    </script>
+</body>
+</html>
