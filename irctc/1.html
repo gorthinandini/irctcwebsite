@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRCTC - Book Tickets Online</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <style>
+        /* Ensure body does not overflow horizontally */
+        html, body {
+            width: 100%;
+            overflow-x: hidden; /* This prevents horizontal scrolling */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            transition: background 0.3s ease-in-out;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .dark-mode {
+            background: #121212 !important;
+            color: white !important;
+        }
+
+        .navbar {
+            background: #000075;
+            padding: 15px;
+            width: 100%;
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+
+        .navbar .container {
+            max-width: 1500px;
+        }
+
+        .navbar a {
+            color: white !important;
+            font-weight: bold;
+        }
+
+        .navbar a:hover {
+            color: #ffcc00 !important;
+        }
+
+        .dropdown-menu {
+            
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .nav-item:hover .dropdown-menu {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-section {
+            position: relative;
+            text-align: center;
+            color: white;
+            padding: 60px 20px;
+            background: url('https://images.pexels.com/photos/1658967/pexels-photo-1658967.jpeg?auto=compress&cs=tinysrgb&w=600') no-repeat center center; /* Train background image */
+            background-size: cover; /* Ensures the image covers the hero section */
+            border-radius: 10px;
+        }
+
+        .search-box {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        .toggle-mode {
+            cursor: pointer;
+            padding: 10px;
+            background: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .toggle-mode:hover {
+            background: #ffcc00;
+        }
+
+        .container {
+            text-align: center;
+            width: 100%;
+            max-width: 1300px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(255, 255, 255, 0.2);
+            margin: auto;
+            overflow-x: hidden; /* Prevent horizontal scrolling inside the container */
+        }
+
+        h1 {
+            font-size: 2.5em;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.6);
+        }
+
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            animation: fadeInCards 1s ease-out;
+            background-color: white;
+            padding: 30px 0;
+        }
+
+        .service {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            flex-basis: 30%;
+            background: rgba(54, 46, 103, 0.797);
+            box-shadow: 0 5px 20px rgba(59, 64, 215, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.25);
+            text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 30px #ffcc00, 0 0 40px #ffcc00;
+        }
+
+        .service .name {
+            font-size: 1.2em;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-top: 10px;
+            transition: text-shadow 0.3s ease;
+        }
+
+        .service:hover .name {
+            text-shadow: 0 0 10px #505a80, 0 0 20px #9493b2, 0 0 30px #587fba, 0 0 40px #5954ad;
+        }
+
+        .service .icon img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            box-shadow: 0 3px 10px  #CCC7D2;
+        }
+
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes fadeInCards {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 1024px) {
+            .service { flex-basis: 45%; }
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .service { flex-basis: 100%; }
+            .hero-section h1 {
+                font-size: 1.5rem;
+            }
+            .hero-section p {
+                font-size: 1rem;
+            }
+            .hero-section a {
+                font-size: 1rem;
+            }
+            .search-box {
+                padding: 15px;
+            }
+        }
+
+        .dark-mode .service {
+            background: rgba(255, 255, 255, 0.1) !important;
+            color: white !important;
+        }
+
+        /* Train Booking Styles */
+        .theme-dark {
+            background: #121212 !important;
+            color: white !important;
+        }
+        .theme-dark .main-nav {
+            background: #1c1c1c !important;
+        }
+        .service {
+    display: inline-block;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.service a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    padding: 10px;
+    border-radius: 10px;
+    transition: background 0.3s ease-in-out;
+}
+
+.service:hover {
+    transform: scale(1.05);
+}
+
+.icon img {
+    width: 60px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.service:hover .icon img {
+    transform: rotate(10deg);
+}
+
+        /* Booking Box */
+        .booking-wrapper {
+            display: flex;
+            justify-content: center;
+            padding: 30px;
+        }
+        .booking-box {
+            background: white;
+            padding: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+        }
+        .booking-box input, .booking-box button {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .booking-box button {
+            background: #007bff;
+            color: white;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Services */
+        .service-section {
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .service-section h2 {
+            margin-bottom: 20px;
+        }
+        .feature-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .feature-card {
+            width: 400px;
+            height:400px;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .feature-card:hover {
+            transform: scale(1.05);
+            background: #ffcc00;
+        }
+        .feature-card img {
+            width: 80px;
+            height: 80px;
+        }
+        :root {
+            --primary-color: #4B0082;
+            --secondary-color: #6A0DAD;
+            --highlight-color: #FFD700;
+            --text-light: #dcdcdc;
+            --text-muted: rgba(255, 255, 255, 0.7);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .social-media h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: var(--highlight-color);
+        }
+
+        .social-icons img {
+            width: 25px;
+            height: 25px;
+        }
+
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .menu-item {
+            text-align: left;
+            position: relative;
+            border-radius: 8px;
+            padding: 8px;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .dropdown-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 10px;
+            transition: color 0.3s;
+        }
+
+        .dropdown-btn:hover {
+            color: var(--highlight-color);
+        }
+
+        .dropdown {
+            list-style: none;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.4s ease-in-out;
+        }
+
+        .dropdown li {
+            font-size: 14px;
+            padding: 8px 12px;
+            color: var(--text-light);
+            transition: color 0.3s, background 0.3s;
+        }
+
+        .dropdown li:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+
+        .footer-bottom {
+            margin-top: 30px;
+            font-size: 14px;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand text-white fw-bold" href="#">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7FihFnL3fXD3o0UNQLwQXnet4SjYKqdGa-w&s" alt="IRCTC Logo" style="border-radius:5px;" height="40"> IRCTC
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <!-- Dropdown fix -->
+                   
+                    <li class="nav-item"><a class="nav-link" href="traintracking.html">Track Train</a></li>
+                    <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="alert.html">Alert</a></li>
+                    <li class="nav-item"><a class="nav-link" href="trains.html">Train List</a></li>
+                    <li class="nav-item"><a class="nav-link" href="query.html">Query</a></li>
+                    <li class="nav-item"><a class="nav-link" href="trainschedule.html">Train Schedule</a></li>
+                    <li class="nav-item"><a class="nav-link" href="waitinglistenquiry.html">PNR Status   </a></li>
+                </ul>
+                <button class="toggle-mode ms-3" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+            </div>
+        </div>
+    </nav>
+    
+
+    <!-- Hero Section with Train Background -->
+    <div class="hero-section">
+        <div class="container">
+            <h1>Welcome to IRCTC</h1>
+            <p>Book train tickets easily & track live train status</p>
+            <a href="#search-section" class="btn btn-warning btn-lg mt-3">Book Now</a>
+        </div>
+    </div>
+
+    <!-- Search Section -->
+    <div id="search-section" class="row mt-5">  
+        <div class="col-md-8 mx-auto">
+            <div class="search-box p-5 rounded shadow-lg text-center" 
+                 style="background: linear-gradient(135deg, #1e3c72, #2a5298); color: white; border-radius: 15px;">
+                <h2 class="mb-3 fw-bold">🚆 Find Your Perfect Train</h2>
+                <p class="mb-4" style="font-size: 1.1rem;">Explore routes and book your tickets with ease.</p>
+                <div class="d-flex flex-column align-items-center">
+                    <button class="btn btn-light w-75 fw-bold py-3 mb-3" 
+                            style="border-radius: 50px; font-size: 1.2rem; transition: 0.3s;" 
+                            onmouseover="this.style.background='#ffcc00'; this.style.color='black';"
+                            onmouseout="this.style.background='white'; this.style.color='black';"
+                            onclick="window.location.href='search.html'">🎟 Book Tickets</button>
+                    <button class="btn btn-light w-75 fw-bold py-3 mb-3" 
+                            style="border-radius: 50px; font-size: 1.2rem; transition: 0.3s;" 
+                            onmouseover="this.style.background='#ffcc00'; this.style.color='black';"
+                            onmouseout="this.style.background='white'; this.style.color='black';"
+                            onclick="window.location.href='checkschedule.html'">🎟 Check Schedule</button>
+                    <button class="btn btn-light w-75 fw-bold py-3" 
+                            style="border-radius: 50px; font-size: 1.2rem; transition: 0.3s;" 
+                            onmouseover="this.style.background='#ffcc00'; this.style.color='black';"
+                            onmouseout="this.style.background='white'; this.style.color='black';"
+                            onclick="window.location.href='offers.html'">🔥 View Offers</button>
+                   
+    <button class="btn btn-light w-75 fw-bold py-3 mb-3"
+    style="border-radius: 50px; font-size: 1.2rem; transition: 0.3s;position:relative;top:20px;"
+    onmouseover="this.style.background='#ffcc00'; this.style.color='black';"
+    onmouseout="this.style.background='white'; this.style.color='black';"
+    onclick="window.location.href='contactus.html'">📞 Contact Us</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Explore Services Section -->
+    <div class="container">
+        <h1>Explore IRCTC Services</h1>
+        <div class="services">
+            <div class="service" id="flights">
+                <a href="https://www.air.irctc.co.in/" target="_blank">
+                    <div class="icon">
+                        <img src="https://png.pngtree.com/png-clipart/20220105/ourmid/pngtree-hand-drawn-cartoon-sketch-aircraft-design-elements-png-image_4083954.png" alt="Flights">
+                    </div>
+                    <div class="name">FLIGHTS</div>
+                </a>
+            </div>
+            <div class="service" id="hotels">
+                <a href="https://www.hotels.irctc.co.in/hotels" target="_blank">
+                <div class="icon"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtbyQUyD28qGwu8hzHHh7CmlVt9YKoAP_sHw&s" alt="Hotels"></div>
+                <div class="name">HOTELS</div>
+            </div>
+            <div class="service" id="railDrishti">
+                <a href=https://raildrishti.indianrailways.gov.in/raildrishti/raildrishtiv3/target="_blank">
+                <div class="icon"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDmUS1BCowr5sjrd4AePHlJP3m8zOUnu9VDA&s" alt="Rail Drishti"></div>
+                <div class="name">RAIL DRISHTI</div>
+            </div>
+            <div class="service" id="tourism">
+                <a href="https://www.irctctourism.com/bharatgaurav" target="_blank">
+                <div class="icon"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlAKnniHXyjyVZyv6uLCj5XGH0TKITtc9lPg&s" alt="Tourism"></div>
+                <div class="name">TOURISM</div>
+            </div>
+            <div class="service" id="trainBooking">
+                <a href="https://www.ftr.irctc.co.in/ftr/" target="_blank">
+                <div class="icon"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2Q-M-JUMa_mgK6JkEJAvC_jeDrUJr1Ev6ZA&s" alt="Train Booking"></div>
+                <div class="name">TRAIN BOOKING</div>
+            </div>
+            <div class="service" id="trackTrain">
+                <a href="https://www.ecatering.irctc.co.in/" target="_blank">
+                <div class="icon"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStvGq6Z0eL-spzoCHgorpAZORDW9vGFlKO4Q&s" alt="Track Your Train"></div>
+                <div class="name">E-catering </div>
+            </div>
+            <div class="service" id="holidayPackages">
+                <a href="https://www.air.irctc.co.in/" target="_blank">
+                <div class="icon"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQM00-6G97wSH7x81ExojHEvHP8VzxtqHWyKQ&s" alt="Holiday Packages"></div>
+                <div class="name">HOLIDAY PACKAGES</div>
+            </div>
+            <div class="service" id="lounge">
+                <a href="https://www.irctctourism.com/LoungeHTML/packageTC.html" target="_blank">
+                <div class="icon"><img src="https://www.shutterstock.com/image-vector/interior-living-room-large-panoramic-260nw-389140471.jpg" alt="Lounge"></div>
+                <div class="name">LOUNGE</div>
+            </div>
+            <div class="service" id="carRental">
+                <a href="https://economictimes.indiatimes.com/industry/transportation/railways/irctc-ties-up-with-ola-for-booking-cab-on-its-website-app/articleshow/63369788.cms?from=mdr" target="_blank">
+                <div class="icon"><img src="https://www.shutterstock.com/image-vector/car-rental-service-via-cellphone-260nw-447092161.jpg" alt="Car Rental"></div>
+                <div class="name">CAR RENTAL</div>
+            </div>
+            <div class="service" id="retiringRooms">
+                <a href="https://www.rr.irctc.co.in/home" target="_blank"></a>
+                <div class="icon"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvsXTCP_R-aSromjBLKuPy_tOXqeFQmMNVmQ&s" alt="Retiring Rooms"></div>
+                <div class="name">RETIRING ROOMS</div>
+            </div>
+        </div>
+    </div>
+
+   
+    
+
+    
+
+    <!-- Services -->
+    <section class="service-section">
+        <h3>Explore Our Services</h3>
+        <div class="feature-grid">
+            <div class="feature-card" >
+                <img src="https://www.ecstaticindiatours.com/uploads/tour_image/1696313847kse1c-mahrarja.jpg"  style="width:200px;height:150px;"alt="Flights">
+                <p>Flights</p>
+                <p>IRCTC (Indian Railway Catering and Tourism Corporation) extends its services beyond railways by offering domestic and international flight bookings at competitive prices. Through IRCTC Air, users can seamlessly book flights, avail exclusive offers, and enjoy a hassle-free travel experience.</p>
+                    <a href ="readmore.html"><button>Read More</button></a>
+                    
+    
+                
+               
+            </div>
+            <div class="feature-card" onclick="alert('Hotels Coming Soon!')">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr_ipwGuR5qXU3_9sHz4xDrItG5ikf-Pm0YQ&s" alt="Hotels" style="width:200px;height:150px;">
+                <p>Hotels</p>
+                <p>In the IRCTC ecosystem, the IRCTC Hotels service allows users to book accommodations across various cities in India. This service is integrated into the IRCTC website and mobile app, enabling travelers to book hotels along with their train tickets.</p>
+                <a href ="readmore.html"><button>Read More</button></a>
+            </div>
+            <div class="feature-card" >
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpvjP5DRwFqhT7hQFs0JggGfl-FA9lv62Yow&s"  style="width:200px;height:150px;"alt="Tourism">
+                <p>Tourism</p>
+                <p>The Indian Railway Catering and Tourism Corporation (IRCTC) offers a variety of tourism services, making travel across India convenient and affordable. IRCTC Tourism provides options ranging from luxury train journeys to budget-friendly tour packages.</p>
+                <a href ="readmore.html"><button>Read More</button></a>
+            </div>
+            <div class="feature-card" onclick="alert('Car Rentals Coming Soon!')">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6Ffj5kmIOSr2eDQzdqqPGvR7IVstzUZyHuw&s"  style="width:250px;height:150px;"alt="Car Rentals">
+                <p>Car Rentals</p>
+                <p>IRCTC Car Rentals is a service provided by IRCTC in collaboration with major transport aggregators to offer convenient and affordable taxi services for travelers. Whether you're commuting within a city, heading to the railway station, or exploring tourist destinations, IRCTC ensures a smooth travel experience.</p>
+                <a href ="readmore.html"><button>Read More</button></a>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card" onclick="alert('Flights Coming Soon!')">
+                    <img src="https://www.ecstaticindiatours.com/uploads/tour_image/1696313847kse1c-mahrarja.jpg"  style="width:200px;height:150px;"alt="Flights">
+                    <p>Rail your Packages</p>
+                    <p>IRCTC offers Exclusive Rail tour packages with confirmed train tickets, sight-seeing and meals for enchanting Nilgiri Mountains, Darjeeling, Kullu Manali, Kashmir, Gangtok or divine tours of Mata Vaishno Devi, Holiday packages/ Land packages to these destinations are also available.</p>
+                        <a href ="readmore.html"><button>Read More</button></a>
+                        
+        
+                    </p>
+                   
+                </div>
+                <div class="feature-grid">
+                    <div class="feature-card" >
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbvN6DM72ciJt-tbW2dTR-GyUvaDVzIgG2yw&s"  style="width:200px;height:150px;"alt="Meals">
+                        <p>Make Your Day Full Filled</p>
+                        <p>Regular meal consumption is vital for maintaining optimal health and well-being. By avoiding the practice of skipping meals, we ensure sustained energy levels, support a healthy metabolism, promote nutritional adequacy, regulate hunger and appetite, and enhance our mental well-being</p>
+                            <a href ="meals.html"><button>Read More</button></a>
+                            
+            
+                        </p>
+                       
+                    </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="social-media">
+            <h3>Get Connected with us on social networks</h3>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/IRCTCofficial/"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtfbcYeYgf0wQJ-LSPm3CPbyB7T1p0f5bnaA&s" alt="Facebook" style="width:50px;height:45px;border-radius:400px;"></a>
+                <a href="https://www.thehindubusinessline.com/info-tech/how-to/indian-railways-now-check-irctc-pnr-status-on-whatsapp/article65974995.ece"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlQ_0ZN5Vmw7k2oV_6xsh12fyu0sEU09dn1w&s" alt="WhatsApp" style="width:50px;height:45px;border-radius:400px;"></a>
+                <a href="https://www.youtube.com/c/IRCTCOFFICIAL"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" style="width:50px;height:45px;border-radius:400px;"></a>
+                <a href="https://www.instagram.com/irctc.official/?hl=en"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZKeSw8DDov0_KWbM6ef9foIUdti6LkWZ6zQ&s" alt="Instagram" style="width:50px;height:45px;border-radius:400px;"></a>
+                <a href="https://www.linkedin.com/company/irctc/?originalSubdomain=in"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYqE3asP0YRPRnR6U3BS85jeB2u7UWPrmrzA&s" alt="LinkedIn" style="width:50px;height:45px;border-radius:400px;"></a>
+                <a href="https://t.me/IRCTC_Official/8148"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/1200px-Telegram_logo.svg.png" alt="Telegram" style="width:50px;height:45px;border-radius:400px;"></a>
+                <a href="https://in.pinterest.com/irctcofficial/"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsowGQKww0vUVBidSgOu75KHCIm50LGKT7Vw&s" alt="Pinterest" style="width:50px;height:45px;border-radius:400px;"></a>
+                <a href="https://www.tumblr.com/irctcofficial"><img src="https://64.media.tumblr.com/426446f32342eeb234de07a6582a706e/7ab35780920aea80-5a/s512x512u_c1/bef22081420a3c139663a5e9ae776fea80ad60b5.jpg" alt="Tumblr" style="width:50px;height:45px;border-radius:400px;"></a>
+                <a href="https://x.com/IRCTCofficial/highlightsx"><img src="https://images.macrumors.com/t/7uxIh0WmbJb3efOxseFOV_I7ekw=/2250x/article-new/2021/03/Twitter-Feature.jpg" alt="Twitter" style="width:50px;height:45px;border-radius:400px;"></a>
+            </div>
+        </div>
+
+        <div class="menu" id="menuContainer"></div>
+
+        <div class="footer-bottom">© 2025 IRCTC. All Rights Reserved.</div>
+    </footer>
+
+    <script>
+        const menuData = [
+            { category: "IRCTC Trains", options: ["Book Train Tickets", "Tatkal Booking", "Train Schedule"] },
+            { category: "General Information", options: ["Train Running Status", "PNR Enquiry", "Station Codes"] },
+            { category: "Important Information", options: ["Railway Zones", "Safety Guidelines", "Tourist Guidelines"] },
+            { category: "Agents", options: ["Agent Registration", "Agent Login", "Agent Support"] },
+            { category: "Enquiries", options: ["Customer Support", "FAQs", "Helpline Numbers"] },
+            { category: "IRCTC eWallet", options: ["Wallet Recharge", "Transaction History", "How to Use"] },
+            { category: "Avail Loyalty Benefits", options: ["IRCTC Loyalty Points", "Redeem Rewards", "Program Details"] },
+            { category: "IRCTC Official App", options: ["Download App", "App Features", "User Guide"] },
+            { category: "Advertise with us", options: ["Advertising Options", "Pricing", "Contact Us"] },
+            { category: "Refund Rules", options: ["Cancellation Policy", "Refund Status", "Compensation Rules"] },
+            { category: "Person With Disability Facilities", options: ["Special Seats", "Assistance Services", "Concessions"] },
+            { category: "IRCTC-iPAY Payment Gateway", options: ["How it Works", "Supported Banks", "Transaction Security"] },
+            { category: "IRCTC Zone", options: ["User Dashboard", "Booking History", "Preferences"] },
+            { category: "Policies", options: ["Privacy Policy", "Terms & Conditions", "Refund & Cancellation"] },
+            { category: "Train Information", options: ["Train Timings", "Seat Availability", "Fare Inquiry"] },
+            { category: "Booking Assistance", options: ["Ticket Booking Guide", "IRCTC Helpline", "Reservation Rules"] },
+            { category: "Catering Services", options: ["E-Catering", "Onboard Menu", "Premium Food"] },
+            { category: "Tourist Services", options: ["Luxury Trains", "Bharat Darshan", "IRCTC Packages"] },
+            { category: "Feedback & Complaints", options: ["Lodge a Complaint", "Feedback Form", "Customer Care"] },
+            { category: "Other Services", options: ["Retiring Rooms", "Lounge Booking", "Wheelchair Assistance"] }
+        ];
+        
+        const menuContainer = document.getElementById("menuContainer");
+        menuContainer.innerHTML = menuData.map(item => `
+            <div class="menu-item">
+                <button class="dropdown-btn">${item.category} ▼</button>
+                <ul class="dropdown">
+                    ${item.options.map(option => `<li>${option}</li>`).join("")}
+                </ul>
+            </div>
+        `).join("");
+
+        const dropdownBtns = document.querySelectorAll(".dropdown-btn");
+        dropdownBtns.forEach(btn => {
+            btn.addEventListener("click", function() {
+                const dropdown = this.nextElementSibling;
+                if (dropdown.style.maxHeight) {
+                    dropdown.style.maxHeight = null;
+                } else {
+                    dropdown.style.maxHeight = dropdown.scrollHeight + "px";
+                }
+            });
+        });
+    </script>
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+
+            // Save the user's preference in localStorage
+            if (document.body.classList.contains("dark-mode")) {
+                localStorage.setItem("darkMode", "enabled");
+            } else {
+                localStorage.removeItem("darkMode");
+            }
+        }
+
+        // Check user preference on page load
+        if (localStorage.getItem("darkMode") === "enabled") {
+            document.body.classList.add("dark-mode");
+        }
+    </script>
+
+    <!-- Bootstrap JS and Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
