@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PNR Status - IRCTC</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #001f3f, #007bff);
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        .pnr-container {
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            color: white;
+            text-align: center;
+            position: relative;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .form-control {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+        }
+        .btn {
+            width: 100%;
+            margin-top: 10px;
+            font-weight: bold;
+            border-radius: 10px;
+        }
+        .result-box {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            margin-top: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+        .show { opacity: 1; transform: translateY(0); }
+        .loader {
+            display: none;
+            text-align: center;
+            margin-top: 15px;
+        }
+        .waiting-box {
+            display: none;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+        .waiting-box.show { opacity: 1; transform: scale(1); }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="pnr-container">
+        <h3><i class="fas fa-ticket-alt"></i> Check PNR Status</h3>
+        <form id="pnrForm">
+            <div class="mb-3">
+                <input type="text" class="form-control" id="pnrNumber" placeholder="Enter 10-digit PNR" maxlength="10" required>
+                <div id="pnrError" class="text-danger mt-1" style="display: none;">Invalid PNR number!</div>
+            </div>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Check Status</button>
+        </form>
+        <div class="loader"><i class="fas fa-circle-notch fa-spin"></i></div>
+        <div class="result-box" id="pnrResult">
+            <h5>PNR Status:</h5>
+            <p id="statusText"></p>
+            <button class="btn btn-warning" id="waitingListBtn" style="display: none;">View Waiting List</button>
+            <button class="btn btn-danger" id="cancelTicketBtn" style="display: none;">Cancel Ticket</button>
+        </div>
+        <div class="waiting-box" id="waitingBox">
+            <h5>Waiting List Details</h5>
+            <p id="waitingDetails"></p>
+        </div>
+    </div>
+    <script>
+        const pnrData = {};
+        const statuses = ["Confirmed (CNF)", "RAC", "Waiting List (WL)"];
+        for (let i = 1; i <= 100; i++) {
+            let pnr = (9000000000 + i).toString();
+            let wlPosition = Math.floor(Math.random() * 20) + 1;
+            let peopleAhead = wlPosition - 1;
+            pnrData[pnr] = {
+                status: statuses[Math.floor(Math.random() * statuses.length)],
+                wlPosition: wlPosition,
+                peopleAhead: peopleAhead
+            };
+        }
+        
+        document.getElementById("pnrForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let pnrNumber = document.getElementById("pnrNumber").value;
+            let pnrError = document.getElementById("pnrError");
+            let pnrResult = document.getElementById("pnrResult");
+            let statusText = document.getElementById("statusText");
+            let loader = document.querySelector(".loader");
+            let waitingListBtn = document.getElementById("waitingListBtn");
+            let cancelTicketBtn = document.getElementById("cancelTicketBtn");
+            let waitingBox = document.getElementById("waitingBox");
+            let waitingDetails = document.getElementById("waitingDetails");
+
+            waitingBox.classList.remove("show");
+            waitingBox.style.display = "none";
+            
+            if (pnrData[pnrNumber]) {
+                pnrError.style.display = "none";
+                loader.style.display = "block";
+                pnrResult.classList.remove("show");
+                
+                setTimeout(() => {
+                    loader.style.display = "none";
+                    pnrResult.classList.add("show");
+                    
+                    let details = pnrData[pnrNumber];
+                    statusText.innerHTML = `<strong>Current Status:</strong> ${details.status}`;
+                    
+                    if (details.status.includes("WL")) {
+                        waitingListBtn.style.display = "block";
+                        waitingListBtn.onclick = function () {
+                            waitingDetails.innerHTML = `<strong>WL Position:</strong> ${details.wlPosition}<br><strong>People Ahead:</strong> ${details.peopleAhead}`;
+                            waitingBox.style.display = "block";
+                            setTimeout(() => waitingBox.classList.add("show"), 10);
+                        };
+                    } else {
+                        waitingListBtn.style.display = "none";
+                    }
+                    
+                    // Enable or Disable Cancel Button based on Status
+                    if (details.status === "Confirmed (CNF)") {
+                        cancelTicketBtn.style.display = "none";
+                    } else {
+                        cancelTicketBtn.style.display = "block";
+                    }
+
+                    // Handle Cancel Ticket Click
+                    cancelTicketBtn.onclick = function () {
+                        details.status = "Cancelled";
+                        statusText.innerHTML = `<strong>Current Status:</strong> Cancelled`;
+                        cancelTicketBtn.style.display = "none";
+                    };
+                }, 1500);
+            } else {
+                pnrError.style.display = "block";
+                pnrResult.classList.remove("show");
+            }
+        });
+    </script>
+</body>
+</html>
