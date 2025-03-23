@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRCTC Exclusive Offers</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        
+        /* Navbar */
+        .navbar {
+            background-color: #003366;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px auto;
+            text-align: center;
+        }
+        h1 {
+            color: #003366;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .offers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .offer-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .offer-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .offer-card img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        .offer-card h2 {
+            font-size: 20px;
+            color: #003366;
+            margin-top: 10px;
+        }
+        .offer-card p {
+            font-size: 14px;
+            color: #555;
+        }
+        .offer-card button {
+            background: #004080;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .offer-card button:hover {
+            background: #002855;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 340px;
+            text-align: center;
+            position: relative;
+        }
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            cursor: pointer;
+            color: #ff0000;
+        }
+        .close:hover {
+            color: #cc0000;
+        }
+        input[type="date"] {
+            padding: 8px;
+            width: 100%;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .confirm-btn {
+            background: #004080;
+            color: white;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+        }
+        .confirm-btn:hover {
+            background: #002855;
+        }
+    </style>
+    <script>
+        function openModal(offerName) {
+            document.getElementById("offerName").innerText = offerName;
+            document.getElementById("offerModal").style.display = "flex";
+        }
+        
+        function closeModal() {
+            document.getElementById("offerModal").style.display = "none";
+        }
+        
+        function confirmOffer() {
+            let dateInput = document.getElementById("offerDate").value;
+            if (!dateInput) {
+                alert("Please select a date before claiming the offer.");
+                return;
+            }
+            alert("Offer claimed successfully for " + dateInput + "!");
+            closeModal();
+        }
+    </script>
+</head>
+<body>
+    <div class="navbar">IRCTC Exclusive Offers</div>
+    <div class="container">
+        <h1>Grab Your Special Offers</h1>
+        <div class="offers">
+            <div class="offer-card" onclick="openModal('IRCTC SBI Platinum Card Offer')">
+                <img src="https://www.paisabazaar.com/wp-content/uploads/2024/11/IRCTC-SBI-Platinum-Card_1.jpg" alt="SBI Card Offer">
+                <h2>IRCTC SBI Platinum Card</h2>
+                <p>Earn 10% reward points on train ticket bookings using the SBI Platinum Card.</p>
+            </div>
+            <div class="offer-card" onclick="openModal('Maharajas’ Express Luxury Offer')">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-fCTYsuxtougrc4Gx2lLeUS09xSv1lx3gTw&s" alt="Luxury Train Offer">
+                <h2>Maharajas’ Express Luxury Offer</h2>
+                <p>Exclusive companion ticket offer on India’s most luxurious train.</p>
+            </div>
+            <div class="offer-card" onclick="openModal('IRCTC Holiday Special Train')">
+                <img src="https://www.livemint.com/lm-img/img/2024/08/31/original/4_1725079761669.jpg" alt="Holiday Special">
+                <h2>Holiday Special Train</h2>
+                <p>Book holiday special trains with added luxury and comfort.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="offerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="offerName"></h2>
+            <p>Select a date to claim the offer:</p>
+            <input type="date" id="offerDate">
+            <button class="confirm-btn" onclick="confirmOffer()">Confirm</button>
+        </div>
+    </div>
+</body>
+</html>
