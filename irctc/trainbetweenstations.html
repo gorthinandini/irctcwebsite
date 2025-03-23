@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trains Between Stations</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding-top: 20px;
+        }
+        .container {
+            max-width: 800px;
+        }
+        .train-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .train-card h5 {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2 class="text-center mb-4">Find Trains Between Stations</h2>
+
+        <!-- Search Form -->
+        <div class="card p-3">
+            <div class="mb-3">
+                <label class="form-label">Source Station</label>
+                <input type="text" id="source" class="form-control" placeholder="Enter Source Station">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Destination Station</label>
+                <input type="text" id="destination" class="form-control" placeholder="Enter Destination Station">
+            </div>
+            <button class="btn btn-primary w-100" onclick="findTrains()">Search Trains</button>
+        </div>
+
+        <!-- Train Results -->
+        <div id="trainResults" class="mt-4"></div>
+    </div>
+
+    <!-- JavaScript for Search Functionality -->
+    <script>
+        const trains = [
+            { number: "12727", name: "Godavari Express", from: "Visakhapatnam", to: "Hyderabad", departure: "17:25", arrival: "06:15", duration: "12h 50m" },
+            { number: "12734", name: "Narayanadri Express", from: "Tirupati", to: "Secunderabad", departure: "18:25", arrival: "06:05", duration: "11h 40m" },
+            { number: "12805", name: "Janmabhoomi Express", from: "Visakhapatnam", to: "Hyderabad", departure: "06:15", arrival: "19:40", duration: "13h 25m" },
+            { number: "12710", name: "Simhapuri Express", from: "Vijayawada", to: "Hyderabad", departure: "23:00", arrival: "06:30", duration: "7h 30m" },
+            { number: "12718", name: "Ratnachal Express", from: "Vijayawada", to: "Visakhapatnam", departure: "06:05", arrival: "12:00", duration: "5h 55m" },
+            { number: "12760", name: "Charminar Express", from: "Hyderabad", to: "Chennai", departure: "18:10", arrival: "08:15", duration: "14h 5m" },
+            { number: "12797", name: "Venkatadri Express", from: "Hyderabad", to: "Tirupati", departure: "20:05", arrival: "07:30", duration: "11h 25m" },
+            { number: "12791", name: "Secunderabad Intercity", from: "Vijayawada", to: "Secunderabad", departure: "16:00", arrival: "21:15", duration: "5h 15m" },
+            { number: "17016", name: "Visakha Express", from: "Hyderabad", to: "Visakhapatnam", departure: "16:50", arrival: "07:05", duration: "14h 15m" },
+            { number: "12722", name: "Dakshin Express", from: "Hyderabad", to: "Warangal", departure: "22:00", arrival: "00:30", duration: "2h 30m" },
+            { number: "12839", name: "Howrah Mail", from: "Secunderabad", to: "Rajahmundry", departure: "22:30", arrival: "05:50", duration: "7h 20m" },
+            { number: "12788", name: "Rayalaseema Express", from: "Tirupati", to: "Kurnool", departure: "20:00", arrival: "04:30", duration: "8h 30m" },
+            { number: "12763", name: "Padmavati Express", from: "Secunderabad", to: "Tirupati", departure: "18:30", arrival: "06:50", duration: "12h 20m" },
+            { number: "17014", name: "Hyderabad Express", from: "Guntur", to: "Hyderabad", departure: "22:50", arrival: "07:15", duration: "8h 25m" },
+            { number: "12736", name: "Nanded Express", from: "Nizamabad", to: "Hyderabad", departure: "16:45", arrival: "21:30", duration: "4h 45m" },
+            { number: "17487", name: "Tirumala Express", from: "Kadapa", to: "Visakhapatnam", departure: "19:00", arrival: "09:00", duration: "14h 00m" },
+            { number: "17604", name: "Krishna Express", from: "Kurnool", to: "Guntur", departure: "07:30", arrival: "14:45", duration: "7h 15m" },
+            { number: "17005", name: "Kakatiya Fast Passenger", from: "Khammam", to: "Warangal", departure: "06:00", arrival: "08:00", duration: "2h 00m" }
+        ];
+
+        function findTrains() {
+            let source = document.getElementById("source").value.trim().toLowerCase();
+            let destination = document.getElementById("destination").value.trim().toLowerCase();
+            let resultsDiv = document.getElementById("trainResults");
+
+            resultsDiv.innerHTML = "";
+
+            let filteredTrains = trains.filter(train => 
+                train.from.toLowerCase() === source && train.to.toLowerCase() === destination
+            );
+
+            if (filteredTrains.length === 0) {
+                resultsDiv.innerHTML = `<div class="alert alert-warning">No trains found for this route.</div>`;
+            } else {
+                filteredTrains.forEach(train => {
+                    resultsDiv.innerHTML += `
+                        <div class="train-card">
+                            <h5>${train.name} (${train.number})</h5>
+                            <p><strong>From:</strong> ${train.from} ➝ <strong>To:</strong> ${train.to}</p>
+                            <p><strong>Departure:</strong> ${train.departure} | <strong>Arrival:</strong> ${train.arrival}</p>
+                            <p><strong>Duration:</strong> ${train.duration}</p>
+                        </div>
+                    `;
+                });
+            }
+        }
+    </script>
+</body>
+</html>
