@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Schedule</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        input {
+            padding: 8px;
+            width: 300px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Train Schedule</h2>
+    <input type="text" id="search" placeholder="Search by Train Name or Number" onkeyup="filterTrains()">
+    
+    <table id="trainTable">
+        <thead>
+            <tr>
+                <th>Train Number</th>
+                <th>Train Name</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Departure</th>
+                <th>Arrival</th>
+                <th>Duration</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>12345</td><td>Rajdhani Express</td><td>Delhi</td><td>Mumbai</td><td>10:00 AM</td><td>06:00 PM</td><td>8 hrs</td></tr>
+            <tr><td>67890</td><td>Shatabdi Express</td><td>Mumbai</td><td>Pune</td><td>07:30 AM</td><td>01:30 PM</td><td>6 hrs</td></tr>
+            <tr><td>11223</td><td>Duronto Express</td><td>Kolkata</td><td>Delhi</td><td>08:45 PM</td><td>05:15 AM</td><td>8.5 hrs</td></tr>
+            <tr><td>22456</td><td>Gatimaan Express</td><td>Delhi</td><td>Jhansi</td><td>08:00 AM</td><td>10:00 AM</td><td>2 hrs</td></tr>
+            <tr><td>12951</td><td>Rajdhani Superfast</td><td>Ahmedabad</td><td>Delhi</td><td>09:30 AM</td><td>06:30 PM</td><td>9 hrs</td></tr>
+            <tr><td>19020</td><td>Dehradun Express</td><td>Dehradun</td><td>Mumbai</td><td>11:15 AM</td><td>09:45 PM</td><td>10.5 hrs</td></tr>
+            <tr><td>12627</td><td>Karnataka Express</td><td>Bangalore</td><td>Delhi</td><td>05:50 AM</td><td>02:30 AM</td><td>20 hrs 40 mins</td></tr>
+            <tr><td>11013</td><td>Coimbatore Express</td><td>Chennai</td><td>Coimbatore</td><td>10:30 PM</td><td>05:30 AM</td><td>7 hrs</td></tr>
+            <tr><td>12785</td><td>Mysore Express</td><td>Hyderabad</td><td>Mysore</td><td>06:00 PM</td><td>07:30 AM</td><td>13 hrs 30 mins</td></tr>
+            <tr><td>12511</td><td>Rapti Sagar Express</td><td>Gorakhpur</td><td>Trivandrum</td><td>03:00 PM</td><td>05:45 AM</td><td>38 hrs 45 mins</td></tr>
+            <tr><td>12296</td><td>Sanghamitra Express</td><td>Bangalore</td><td>Patna</td><td>09:00 AM</td><td>04:30 AM</td><td>19 hrs 30 mins</td></tr>
+            <tr><td>12615</td><td>Grand Trunk Express</td><td>Chennai</td><td>Delhi</td><td>06:30 PM</td><td>06:30 AM</td><td>36 hrs</td></tr>
+            <tr><td>12138</td><td>Punjab Mail</td><td>Mumbai</td><td>Firozpur</td><td>07:30 PM</td><td>05:45 AM</td><td>34 hrs 15 mins</td></tr>
+            <tr><td>12647</td><td>Kongu Express</td><td>Coimbatore</td><td>Delhi</td><td>11:00 AM</td><td>08:45 PM</td><td>33 hrs 45 mins</td></tr>
+        </tbody>
+    </table>
+    
+    <script>
+        function filterTrains() {
+            let input = document.getElementById("search").value.toUpperCase();
+            let table = document.getElementById("trainTable");
+            let tr = table.getElementsByTagName("tr");
+            
+            for (let i = 1; i < tr.length; i++) {
+                let td1 = tr[i].getElementsByTagName("td")[0];
+                let td2 = tr[i].getElementsByTagName("td")[1];
+                
+                if (td1 || td2) {
+                    let txtValue1 = td1.textContent || td1.innerText;
+                    let txtValue2 = td2.textContent || td2.innerText;
+                    
+                    if (txtValue1.toUpperCase().indexOf(input) > -1 || txtValue2.toUpperCase().indexOf(input) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
