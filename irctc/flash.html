@@ -1,0 +1,89 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Flash Div on Click</title>
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                text-align: center;
+                margin: 50px;
+            }
+
+            /* Styling for the button */
+            .menu-icon {
+                font-size: 30px;
+                cursor: pointer;
+                padding: 10px;
+                background: lightgray;
+                display: inline-block;
+                border-radius: 5px;
+            }
+
+            /* Hidden div */
+            .flash-div {
+                display: none;
+                width: 200px;
+                padding: 20px;
+                background: rgba(225, 225, 224, 0.008);
+                border: 2px solid black;
+                margin-top: 20px;
+                transition: opacity 0.5s ease-in-out;
+            }
+
+            /* Flash effect */
+            .flash {
+                opacity: 1 !important;
+            }
+        </style>
+    </head>
+    <body>
+
+        <!-- Menu Icon -->
+        <div class="menu-icon" onclick="flashDiv()">
+            <i class="fas fa-bars"></i>
+        </div>
+
+        <!-- Flashing Div -->
+        <div id="flashDiv" class="flash-div">
+            Flights<br>
+    Buses<br>
+    Packages<br>
+    Lounge<br>
+    Hotels<br>
+    Retiring Room<br>
+    Heli Yatra<br>
+    Buddhist Train<br>
+    Tourist Train<br>
+    Cruise<br>
+    Maharajas<br>
+    Golden Chariot<br>
+    Hill Railways<br>
+    Charter<br>
+    Book Your Coach/Train<br>
+    Contact Us<br>
+    Contact Details:<br>
+
+    ✉️ tourism@irctc.com<br>
+    📞 1800110139<br>
+    📞 080-44647998 / 35734998<br>  
+        </div>
+
+        <script>
+            function flashDiv() {
+                var div = document.getElementById("flashDiv");
+                div.style.display = "block"; // Show the div
+                div.classList.add("flash");
+
+                // Hide after a short duration
+                setTimeout(() => {
+                    div.classList.remove("flash");
+                    div.style.display = "none";
+                }, 1000); // Adjust duration (1000ms = 1 second)
+            }
+        </script>
+
+    </body>
+    </html>
