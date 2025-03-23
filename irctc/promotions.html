@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRCTC Promotions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@framer/motion@10.12.16/dist/framer-motion.umd.js"></script>
+    <style>
+        body {
+            background: linear-gradient(120deg, #003087, #00c4cc);
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        .header-text {
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center">
+    <div class="container mx-auto px-4 py-12 md:py-16">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-center header-text mb-12 animate-title"
+            data-animate-title>
+            Exclusive IRCTC Promotions
+        </h1>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <div class="card p-6 rounded-xl shadow-lg text-center flex flex-col items-center" data-animate-card>
+                <img src="https://www.shutterstock.com/image-vector/diwali-festive-offer-sale-advertisement-260nw-2380485571.jpg" 
+                     alt="Festive Discounts" class="mb-6 rounded-lg w-full max-w-[300px] h-auto">
+                <h2 class="text-xl md:text-2xl font-semibold text-gray-800 mb-3">Festive Discounts</h2>
+                <p class="text-gray-600 text-sm md:text-base">Enjoy up to 25% off on train tickets during festive seasons.</p>
+            </div>
+            <div class="card p-6 rounded-xl shadow-lg text-center flex flex-col items-center" data-animate-card>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwqEAHydr33FK11BsoHJtkZPMuRVWJgAPh6w&s" 
+                     alt="Loyalty Rewards" class="mb-6 rounded-lg w-full max-w-[300px] h-auto">
+                <h2 class="text-xl md:text-2xl font-semibold text-gray-800 mb-3">Loyalty Rewards</h2>
+                <p class="text-gray-600 text-sm md:text-base">Earn points on every booking, redeemable for exciting discounts.</p>
+            </div>
+            <div class="card p-6 rounded-xl shadow-lg text-center flex flex-col items-center" data-animate-card>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuEKNVRJlxY3zyio7tCVZgW_ps5mv-5MTwqw&s" 
+                     alt="Cashback Offers" class="mb-6 rounded-lg w-full max-w-[300px] h-auto">
+                <h2 class="text-xl md:text-2xl font-semibold text-gray-800 mb-3">Cashback Offers</h2>
+                <p class="text-gray-600 text-sm md:text-base">Pay with select methods and enjoy cashback on your bookings.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { motion } = framerMotion;
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // Title Animation
+            motion("[data-animate-title]", {
+                initial: { opacity: 0, y: -50, scale: 0.9 },
+                animate: { 
+                    opacity: 1, 
+                    y: 0, 
+                    scale: 1,
+                    transition: { 
+                        duration: 0.8, 
+                        ease: "easeOut", 
+                        type: "spring", 
+                        stiffness: 120 
+                    }
+                }
+            });
+
+            // Card Animations with Stagger
+            const cards = document.querySelectorAll("[data-animate-card]");
+            cards.forEach((card, index) => {
+                motion(card, {
+                    initial: { 
+                        opacity: 0, 
+                        y: 80, 
+                        scale: 0.95 
+                    },
+                    animate: { 
+                        opacity: 1, 
+                        y: 0, 
+                        scale: 1,
+                        transition: { 
+                            duration: 0.7, 
+                            delay: index * 0.15,
+                            ease: "easeOut",
+                            type: "spring",
+                            bounce: 0.3
+                        }
+                    },
+                    whileHover: { 
+                        scale: 1.03, 
+                        y: -10,
+                        transition: { duration: 0.3 }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
