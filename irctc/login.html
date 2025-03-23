@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | ISRTC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            animation: backgroundAnimation 10s infinite alternate ease-in-out;
+        }
+        @keyframes backgroundAnimation {
+            0% { background: linear-gradient(135deg, #667eea, #764ba2); }
+            100% { background: linear-gradient(135deg, #764ba2, #667eea); }
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center h-screen text-white">
+    <nav class="bg-blue-600 p-4 w-full flex justify-between shadow-md fixed top-0">
+        <h1 class="text-2xl font-bold ml-6">ISRTC</h1>
+        <a href="1.html" class="mr-6 hover:underline">Home</a>
+    </nav>
+    
+    <div class="mt-20 w-full max-w-md p-8 bg-white rounded-lg shadow-lg transform scale-95 opacity-0 text-black" id="loginBox">
+        <h2 class="text-3xl font-bold text-center mb-6">Login or Sign Up</h2>
+        <form id="loginForm" class="space-y-4">
+            <input type="email" id="email" placeholder="Email" class="border border-gray-300 p-3 w-full rounded focus:ring-2 focus:ring-blue-500 transition-all duration-300">
+            <input type="password" id="password" placeholder="Password" class="border border-gray-300 p-3 w-full rounded focus:ring-2 focus:ring-blue-500 transition-all duration-300">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white p-3 rounded w-full transition-all duration-300">Login</button>
+        </form>
+        <p class="text-center mt-4">Don't have an account? <a href="signup1.html" class="text-blue-600 hover:underline">Sign up</a></p>
+        <button onclick="window.location.href='1.html'" class="mt-4 w-full bg-gray-300 text-black p-3 rounded hover:bg-gray-400 transition-all duration-300">Return to Home</button>
+    </div>
+    
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            
+            if (email && password) {
+                gsap.to("#loginBox", { scale: 1.1, duration: 0.2, yoyo: true, repeat: 1 });
+                setTimeout(() => {
+                    let isUserRegistered = Math.random() > 0.5; // Simulate user existence
+                    if (isUserRegistered) {
+                        alert("Login Successful!");
+                    } else {
+                        if (confirm("User not found. Do you want to sign up?")) {
+                            window.location.href = "signup1.html";
+                        }
+                    }
+                }, 300);
+            } else {
+                alert("Please enter your email and password.");
+            }
+        });
+        
+        gsap.to("#loginBox", { opacity: 1, scale: 1, duration: 1, ease: "power2.out" });
+    </script>
+</body>
+</html> 
