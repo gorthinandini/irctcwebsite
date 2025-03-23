@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Your Train | ISRTC</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <nav class="bg-blue-600 p-4 text-white flex justify-between">
+        <h1 class="text-2xl font-bold">ISRTC</h1>
+        <a href="1.html">Home</a>
+    </nav>
+
+    <div class="container mx-auto p-6">
+        <h2 class="text-3xl font-bold text-center mb-4">Real-time Train Tracking</h2>
+        <input type="text" id="trainNumber" placeholder="Enter Train Number" class="border p-2 w-full mb-4">
+        <button onclick="trackTrain()" class="bg-blue-500 text-white p-2 rounded w-full">Track Train</button>
+        
+        <div id="trainStatus" class="mt-4 p-4 bg-gray-100 rounded"></div>
+    </div>
+
+    <script src="js/trainTracking.js"></script>
+</body>
+</html>
