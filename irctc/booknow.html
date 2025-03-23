@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Room</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #1e3c72, #2a5298, #4a90e2);
+            color: #fff;
+        }
+
+        /* Booking Form Container */
+        .booking-container {
+            width: 90%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 5px 20px rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .room-type {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        /* Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input, select {
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+        }
+
+        input:focus {
+            outline: none;
+            border: 2px solid #ffcc00;
+        }
+
+        /* Book Now Button */
+        .book-now {
+            padding: 12px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            background: #ffcc00;
+            color: #333;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+        }
+
+        .book-now:hover {
+            background: #ff9900;
+            transform: scale(1.05);
+        }
+
+        /* Confirmation Message */
+        .confirmation {
+            display: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #ffcc00;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="booking-container">
+        <h1>Book Your Room</h1>
+        <div class="room-type" id="roomType">Loading...</div>
+        
+        <form id="bookingForm">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <input type="date" id="checkin" required>
+            <input type="date" id="checkout" required>
+             <a href="confirm.html"><button type="submit" class="book-now">Confirm Booking</button></a>
+        </form>
+
+        <div class="confirmation" id="confirmationMsg">✔ Booking Confirmed!</div>
+    </div>
+
+    <script>
+        // Extract room type from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const roomType = urlParams.get("room") || "Standard Room"; // Default if not found
+        document.getElementById("roomType").textContent = `Room Type: ${roomType}`;
+
+        // Handle form submission
+        document.getElementById("bookingForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            document.getElementById("confirmationMsg").style.display = "block";
+        });
+    </script>
+
+</body>
+</html>
